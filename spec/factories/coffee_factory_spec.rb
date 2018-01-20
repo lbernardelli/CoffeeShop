@@ -15,7 +15,7 @@ RSpec.describe CoffeeFactory do
     it 'A list with one coffee' do
       expect(subject[0].name).to eq('short espresso')
       expect(subject[0].sizes.size).to be 1
-      expect(subject[0].sizes[0]).eql?(CoffeeSize.new({size: :small, price: 3.03}))
+      expect(subject[0].sizes[0]).eql?(CoffeeVariant.new({ size: :small, price: 3.03}))
     end
   end
 end

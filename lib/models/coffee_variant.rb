@@ -1,4 +1,4 @@
-class CoffeeSize
+class CoffeeVariant
   attr_reader :size, :price
 
   def initialize(attr)

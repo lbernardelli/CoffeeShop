@@ -9,7 +9,7 @@ class CoffeeFactory
       coffee = Coffee.new(name: item[:drink_name])
 
       item[:prices].each do |price|
-        coffee.add_size(CoffeeSize.new({size: price[0], price: price[1]}))
+        coffee.add_size(CoffeeVariant.new({ size: price[0], price: price[1]}))
       end
 
       @coffees << coffee
