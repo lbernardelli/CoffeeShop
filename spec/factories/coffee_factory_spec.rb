@@ -1,8 +1,10 @@
 require 'spec_helper'
 RSpec.describe CoffeeFactory do
 
-  context 'Build a empty coffee description' do
-    subject { CoffeeFactory.new('').build }
+  subject { CoffeeFactory.new(prices_json).build }
+
+  context 'Build a empty coffee desciption' do
+    let(:prices_json) { '' }
 
     it('An empty list') { is_expected.to be_empty }
   end
@@ -16,16 +18,13 @@ RSpec.describe CoffeeFactory do
       JSON
     end
 
-    subject { CoffeeFactory.new(prices_json).build }
-
-    it 'A list with one coffee' do
-      expect(subject.size).to be 1
+    it ('A list with one coffee') { expect(subject.size).to be 1 }
+    it 'The built coffee' do
       expect(subject[0].name).to eq('short espresso')
       expect(subject[0].sizes.size).to be 1
       expect(subject[0].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
     end
   end
-
 
   context 'Build two coffees' do
     let(:prices_json) do
@@ -36,8 +35,6 @@ RSpec.describe CoffeeFactory do
       ]
       JSON
     end
-
-    subject { CoffeeFactory.new(prices_json).build }
 
     it('A list containing 2 coffees') { expect(subject.size).to be 2 }
     it 'A bunch of coffees' do
