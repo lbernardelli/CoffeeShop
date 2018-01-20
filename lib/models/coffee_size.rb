@@ -1,0 +1,2 @@
+class CoffeeSize
+end
