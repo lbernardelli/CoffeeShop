@@ -1,6 +1,6 @@
 class CoffeeFactory
   def initialize(prices)
-    @prices = JSON.parse(prices, symbolize_names: true)
+    @prices = JsonParser.to_hash(prices)
     @coffees = []
   end
 
