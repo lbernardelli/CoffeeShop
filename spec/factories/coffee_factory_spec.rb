@@ -13,6 +13,7 @@ RSpec.describe CoffeeFactory do
     subject { CoffeeFactory.new(prices_json).build }
 
     it 'A list with one coffee' do
+      expect(subject.size).to be 1
       expect(subject[0].name).to eq('short espresso')
       expect(subject[0].sizes.size).to be 1
       expect(subject[0].sizes[0]).eql?(CoffeeVariant.new({ size: :small, price: 3.03}))
