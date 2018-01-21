@@ -21,9 +21,9 @@ RSpec.describe CoffeeFactory do
 
     it ('A list with one coffee') { expect(subject.size).to be 1 }
     it 'The built coffee' do
-      expect(subject[0].name).to eq('short espresso')
-      expect(subject[0].sizes.size).to be 1
-      expect(subject[0].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
+      expect(subject[:'short espresso'].name).to eq('short espresso')
+      expect(subject[:'short espresso'].sizes.size).to be 1
+      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
     end
   end
 
@@ -39,14 +39,14 @@ RSpec.describe CoffeeFactory do
 
     it('A list containing 2 coffees') { expect(subject.size).to be 2 }
     it 'A bunch of coffees' do
-      expect(subject[0].name).to eq('short espresso')
-      expect(subject[0].sizes.size).to be 1
-      expect(subject[0].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
+      expect(subject[:'short espresso'].name).to eq('short espresso')
+      expect(subject[:'short espresso'].sizes.size).to be 1
+      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
 
-      expect(subject[1].name).to eq('long black')
-      expect(subject[1].sizes.size).to be 2
-      expect(subject[1].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.25))
-      expect(subject[1].sizes[1]).eql?(CoffeeVariant.new(size: :medium, price: 3.50))
+      expect(subject[:'long black'].name).to eq('long black')
+      expect(subject[:'long black'].sizes.size).to be 2
+      expect(subject[:'long black'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.25))
+      expect(subject[:'long black'].sizes[1]).eql?(CoffeeVariant.new(size: :medium, price: 3.50))
     end
   end
 end

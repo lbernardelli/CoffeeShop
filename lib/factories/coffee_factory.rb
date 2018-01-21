@@ -3,7 +3,7 @@
 class CoffeeFactory
   def initialize(prices)
     @prices = JsonParser.to_hash(prices)
-    @coffees = []
+    @coffees = {}
   end
 
   def build
@@ -14,7 +14,7 @@ class CoffeeFactory
         coffee.add_size(CoffeeVariant.new(size: price[0], price: price[1]))
       end
 
-      @coffees << coffee
+      @coffees[coffee.name.to_sym] = coffee
     end
 
     @coffees
