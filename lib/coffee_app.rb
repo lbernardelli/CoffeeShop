@@ -11,6 +11,5 @@ require 'utils/json_parser'
 class CoffeeApp
   def self.call(prices, orders, _payments)
     @coffees = CoffeeFactory.new(prices).build
-    @orders = OrderFactory.new(orders).build
   end
 end
