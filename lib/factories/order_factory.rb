@@ -1,5 +1,6 @@
-class OrderFactory
+# frozen_string_literal: true
 
+class OrderFactory
   def initialize(orders)
     @raw_orders = JsonParser.to_hash(orders)
     @orders = []

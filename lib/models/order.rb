@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order
   attr_reader :user, :coffee_name, :coffee_size
 

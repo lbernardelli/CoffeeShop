@@ -1,5 +1,8 @@
-# A sample Gemfile
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-gem "rake"
-gem "rspec"
+# A sample Gemfile
+source 'https://rubygems.org'
+
+gem 'rake'
+gem 'rspec'
+gem 'rubocop'

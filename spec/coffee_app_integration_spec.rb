@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'coffee_app'
 
-RSpec.describe "integration" do
-  let(:prices_json) {
+RSpec.describe 'integration' do
+  let(:prices_json) do
     <<-JSON
       [
         { "drink_name": "short espresso", "prices": { "small": 3.03 } },
@@ -13,9 +15,9 @@ RSpec.describe "integration" do
         { "drink_name": "supermochacrapucaramelcream", "prices": { "large": 5.00, "huge": 5.50, "mega": 6.00, "ultra": 7.00 } }
       ]
     JSON
-  }
+  end
 
-  let(:orders_json) {
+  let(:orders_json) do
     <<-JSON
       [
         { "user": "coach", "drink": "long black", "size": "medium" },
@@ -26,9 +28,9 @@ RSpec.describe "integration" do
         { "user": "zoey", "drink": "short espresso", "size": "small" }
       ]
     JSON
-  }
+  end
 
-  let(:payments_json) {
+  let(:payments_json) do
     <<-JSON
       [
         { "user": "coach", "amount": 2.50 },
@@ -37,9 +39,9 @@ RSpec.describe "integration" do
         { "user": "ellis", "amount": 0.65 }
       ]
     JSON
-  }
+  end
 
-  let(:expected_result_json) {
+  let(:expected_result_json) do
     <<-JSON
       [
         { "user": "coach",    "order_total": 8.00, "payment_total": 2.50, "balance": 5.50 },
@@ -48,45 +50,44 @@ RSpec.describe "integration" do
         { "user": "zoey",     "order_total": 6.53, "payment_total": 0.00, "balance": 6.53 }
       ]
     JSON
-  }
+  end
 
   describe CoffeeApp do
     subject(:result) do
       json_result = CoffeeApp.call(prices_json, orders_json, payments_json)
-      JSON.load(json_result)
+      JSON.parse(json_result)
     end
 
-    it "outputs JSON in expected form" do
-      expect(result).to eq JSON.load(expected_result_json)
+    it 'outputs JSON in expected form' do
+      expect(result).to eq JSON.parse(expected_result_json)
     end
 
-    it "has a bunch of users who have ordered coffee" do
-      expect(result[0]["user"]).to eq "coach"
-      expect(result[1]["user"]).to eq "ellis"
-      expect(result[2]["user"]).to eq "rochelle"
-      expect(result[3]["user"]).to eq "zoey"
+    it 'has a bunch of users who have ordered coffee' do
+      expect(result[0]['user']).to eq 'coach'
+      expect(result[1]['user']).to eq 'ellis'
+      expect(result[2]['user']).to eq 'rochelle'
+      expect(result[3]['user']).to eq 'zoey'
     end
 
-    it "has order totals for each user" do
-      expect(result[0]["order_total"]).to eq 8.00 # coach: 3.50 + 4.50 = 8.00
-      expect(result[1]["order_total"]).to eq 3.25 # ellis: 3.25
-      expect(result[2]["order_total"]).to eq 4.50 # rochelle: 4.50
-      expect(result[3]["order_total"]).to eq 6.53 # zoey: 3.50 + 3.03 = 6.53
+    it 'has order totals for each user' do
+      expect(result[0]['order_total']).to eq 8.00 # coach: 3.50 + 4.50 = 8.00
+      expect(result[1]['order_total']).to eq 3.25 # ellis: 3.25
+      expect(result[2]['order_total']).to eq 4.50 # rochelle: 4.50
+      expect(result[3]['order_total']).to eq 6.53 # zoey: 3.50 + 3.03 = 6.53
     end
 
-    it "has payment totals for each user" do
-      expect(result[0]["payment_total"]).to eq 2.50 # coach: 2.50
-      expect(result[1]["payment_total"]).to eq 3.25 # ellis: 2.60 + 0.65
-      expect(result[2]["payment_total"]).to eq 4.50 # rochelle: 4.50
-      expect(result[3]["payment_total"]).to eq 0.00 # zoey: no payments
+    it 'has payment totals for each user' do
+      expect(result[0]['payment_total']).to eq 2.50 # coach: 2.50
+      expect(result[1]['payment_total']).to eq 3.25 # ellis: 2.60 + 0.65
+      expect(result[2]['payment_total']).to eq 4.50 # rochelle: 4.50
+      expect(result[3]['payment_total']).to eq 0.00 # zoey: no payments
     end
 
-    it "has current balance for each user" do
-      expect(result[0]["balance"]).to eq 5.50 # coach: 8.00 - 2.50
-      expect(result[1]["balance"]).to eq 0.00 # ellis: 3.25 - 3.25
-      expect(result[2]["balance"]).to eq 0.00 # rochelle: 4.50 - 4.50
-      expect(result[3]["balance"]).to eq 6.53 # zoey: 6.53
+    it 'has current balance for each user' do
+      expect(result[0]['balance']).to eq 5.50 # coach: 8.00 - 2.50
+      expect(result[1]['balance']).to eq 0.00 # ellis: 3.25 - 3.25
+      expect(result[2]['balance']).to eq 0.00 # rochelle: 4.50 - 4.50
+      expect(result[3]['balance']).to eq 6.53 # zoey: 6.53
     end
   end
-
 end

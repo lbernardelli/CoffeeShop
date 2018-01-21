@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 RSpec.describe CoffeeFactory do
-
   subject { CoffeeFactory.new(prices_json).build }
 
   context 'Build a empty coffee description' do

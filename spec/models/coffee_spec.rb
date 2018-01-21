@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 RSpec.describe Coffee do
@@ -10,11 +12,10 @@ RSpec.describe Coffee do
   end
 
   context 'Add a coffee size' do
-    subject { Coffee.new(name: 'coffee name').add_size(CoffeeVariant.new({size: :small, price: 1.00})) }
+    subject { Coffee.new(name: 'coffee name').add_size(CoffeeVariant.new(size: :small, price: 1.00)) }
 
     it 'has a size on it' do
       expect(subject.sizes).not_to be_empty
     end
-
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoffeeVariant
   attr_reader :size, :price
 

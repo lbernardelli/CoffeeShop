@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 RSpec.describe OrderFactory do
-
   subject { OrderFactory.new(orders_json).build }
 
   context 'Build a empty order description' do
