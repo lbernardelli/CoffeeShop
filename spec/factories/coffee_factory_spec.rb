@@ -3,7 +3,7 @@ RSpec.describe CoffeeFactory do
 
   subject { CoffeeFactory.new(prices_json).build }
 
-  context 'Build a empty coffee desciption' do
+  context 'Build a empty coffee description' do
     let(:prices_json) { '' }
 
     it('An empty list') { is_expected.to be_empty }
