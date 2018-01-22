@@ -12,4 +12,10 @@ class Coffee
     @sizes << coffee_variant
     self
   end
+
+  def price?(variant)
+    price = @sizes.select { |size_variant| size_variant.size.eql?(variant.to_sym) }[0]&.price
+
+    price ? price : 0.00
+  end
 end

@@ -3,19 +3,42 @@
 require 'spec_helper'
 
 RSpec.describe Coffee do
-  context 'initialize' do
-    subject { Coffee.new(name: 'coffee name') }
+  describe 'initialize' do
+    context 'initializing with name' do
+      subject { Coffee.new(name: 'coffee name') }
 
-    it 'Creates a coffee with name' do
-      expect(subject.name).to eq 'coffee name'
+      it 'Creates a coffee with name' do
+        expect(subject.name).to eq 'coffee name'
+      end
     end
   end
 
-  context 'Add a coffee size' do
-    subject { Coffee.new(name: 'coffee name').add_size(CoffeeVariant.new(size: :small, price: 1.00)) }
+  describe 'add_size' do
+    context 'Add a coffee size' do
+      subject { Coffee.new(name: 'coffee name').add_size(CoffeeVariant.new(size: :small, price: 1.00)) }
 
-    it 'has a size on it' do
-      expect(subject.sizes).not_to be_empty
+      it 'has a size on it' do
+        expect(subject.sizes).not_to be_empty
+      end
+    end
+  end
+
+  describe 'price?' do
+    let(:coffee) do
+      coffee = Coffee.new(name: 'latte')
+      coffee.add_size(CoffeeVariant.new(size: :small, price: 1.00))
+    end
+
+    context 'Get price from existing variant' do
+      subject { coffee.price?(:small) }
+
+      it ('Has 1.00 price') { expect(subject).to be 1.00 }
+    end
+
+    context 'Get price from a nonexistent variant' do
+      subject { coffee.price?(:large) }
+
+      it ('Has 0.00 price') { expect(subject).to be 0.00 }
     end
   end
 end
