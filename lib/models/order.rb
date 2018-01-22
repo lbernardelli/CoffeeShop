@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class Order
-  attr_reader :user, :coffee_name, :coffee_size
+  attr_reader :items
 
-  def initialize(attrs = {})
-    @user = attrs[:user]
-    @coffee_name = attrs[:coffee_name]
-    @coffee_size = attrs[:coffee_size]&.to_sym
+  def initialize
+    @items = []
+  end
+
+  def add_item(product:, variant:)
+    @items << OrderItem.new(product: product, variant: variant)
+    self
+  end
+
+  def total?
+    items.inject(0.00) { |sum, item| sum + item.price? }
   end
 end
