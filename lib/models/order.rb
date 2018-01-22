@@ -7,8 +7,8 @@ class Order
     @items = []
   end
 
-  def add_item(product:, variant:)
-    @items << OrderItem.new(product: product, variant: variant)
+  def add_item(item)
+    @items << item
     self
   end
 
