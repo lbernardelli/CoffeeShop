@@ -16,6 +16,6 @@ class Coffee
   def price?(variant)
     price = @sizes.select { |size_variant| size_variant.size.eql?(variant.to_sym) }[0]&.price
 
-    price ? price : 0.00
+    price ? BigDecimal(price.to_s) : BigDecimal.new('0.00')
   end
 end

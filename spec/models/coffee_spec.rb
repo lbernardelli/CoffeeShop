@@ -32,13 +32,13 @@ RSpec.describe Coffee do
     context 'Get price from existing variant' do
       subject { coffee.price?(:small) }
 
-      it ('Has 1.00 price') { expect(subject).to be 1.00 }
+      it ('Has 1.00 price') { expect(subject).to eql BigDecimal.new('1.00') }
     end
 
     context 'Get price from a nonexistent variant' do
       subject { coffee.price?(:large) }
 
-      it ('Has 0.00 price') { expect(subject).to be 0.00 }
+      it ('Has 0.00 price') { expect(subject).to eql BigDecimal.new('0.00') }
     end
   end
 end
