@@ -5,6 +5,6 @@ class CoffeeVariant
 
   def initialize(attr)
     @size = attr[:size]
-    @price = attr[:price]
+    @price = BigDecimal.new(attr[:price].to_s)
   end
 end

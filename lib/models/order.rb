@@ -13,6 +13,6 @@ class Order
   end
 
   def total?
-    items.inject(0.00) { |sum, item| sum + item.price? }
+    items.inject(BigDecimal('0.00')) { |sum, item| BigDecimal.new(sum.to_s) + BigDecimal.new(item.price?.to_s) }
   end
 end
