@@ -23,8 +23,9 @@ class User
     self
   end
 
+  # Balance is calculated on what each user owe, so ordered - payed
   def balance?
-    (BigDecimal.new(total_payed?.to_s) - BigDecimal.new(total_ordered?.to_s)).abs
+    BigDecimal.new(total_ordered?.to_s) - BigDecimal.new(total_payed?.to_s)
   end
 
   def total_payed?

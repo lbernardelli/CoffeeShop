@@ -39,7 +39,8 @@ RSpec.describe User do
     context 'User payed 1.00' do
       before { user.pay(1.00) }
 
-      it('payed a total of 1.00') { is_expected.to eql BigDecimal.new('1.00') }
+      # User has a 1.00 credit
+      it('payed a total of -1.00') { is_expected.to eql BigDecimal.new('-1.00') }
     end
 
     context 'User had ordered a bunch of products' do
