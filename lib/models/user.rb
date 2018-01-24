@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'serializers/user_serializer'
+
 class User
+  include Serializers::UserSerializer
+
   attr_reader :name, :orders
 
   def initialize(name:)
