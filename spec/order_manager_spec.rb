@@ -2,17 +2,17 @@
 
 require 'spec_helper'
 
-RSpec.describe OrderManager do
+RSpec.describe CoffeeApp::OrderManager do
   let(:products) do
     {
-      'long black': stub_coffee_price(Coffee.new(name: 'long black'), :medium, 2.25),
-      'latte': stub_coffee_price(Coffee.new(name: 'latte'), :small, 1.50),
-      'flat white': stub_coffee_price(Coffee.new(name: 'flat white'), :large, 3.50)
+      'long black': stub_coffee_price(CoffeeApp::Coffee.new(name: 'long black'), :medium, 2.25),
+      'latte': stub_coffee_price(CoffeeApp::Coffee.new(name: 'latte'), :small, 1.50),
+      'flat white': stub_coffee_price(CoffeeApp::Coffee.new(name: 'flat white'), :large, 3.50)
     }
   end
 
   describe 'process_all' do
-    subject { OrderManager.new(products).process_all(orders) }
+    subject { CoffeeApp::OrderManager.new(products).process_all(orders) }
 
     context 'Process an empty order list' do
       let(:orders) { nil }
@@ -44,7 +44,7 @@ RSpec.describe OrderManager do
   end
 
   describe 'credit_all' do
-    subject { OrderManager.new(products).credit_all(payments) }
+    subject { CoffeeApp::OrderManager.new(products).credit_all(payments) }
 
     context 'Process an empty payment list' do
       let(:payments) { nil }

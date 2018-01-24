@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe User do
-  let(:user) { User.new(name: 'Micheal') }
+RSpec.describe CoffeeApp::User do
+  let(:user) { CoffeeApp::User.new(name: 'Micheal') }
 
   describe 'total_ordered?' do
     subject { user.total_ordered? }
@@ -84,6 +84,6 @@ RSpec.describe User do
   end
 
   def create_order_double(price)
-    object_double(Order.new, total?: price)
+    object_double(CoffeeApp::Order.new, total?: price)
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-RSpec.describe CoffeeFactory do
-  subject { CoffeeFactory.new(prices_json).build }
+RSpec.describe CoffeeApp::CoffeeFactory do
+  subject { CoffeeApp::CoffeeFactory.new(prices_json).build }
 
   context 'Build a empty coffee description' do
     let(:prices_json) { '' }
@@ -23,7 +23,7 @@ RSpec.describe CoffeeFactory do
     it 'The built coffee' do
       expect(subject[:'short espresso'].name).to eq('short espresso')
       expect(subject[:'short espresso'].sizes.size).to be 1
-      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
+      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeApp::CoffeeVariant.new(size: :small, price: 3.03))
     end
   end
 
@@ -41,12 +41,12 @@ RSpec.describe CoffeeFactory do
     it 'A bunch of coffees' do
       expect(subject[:'short espresso'].name).to eq('short espresso')
       expect(subject[:'short espresso'].sizes.size).to be 1
-      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.03))
+      expect(subject[:'short espresso'].sizes[0]).eql?(CoffeeApp::CoffeeVariant.new(size: :small, price: 3.03))
 
       expect(subject[:'long black'].name).to eq('long black')
       expect(subject[:'long black'].sizes.size).to be 2
-      expect(subject[:'long black'].sizes[0]).eql?(CoffeeVariant.new(size: :small, price: 3.25))
-      expect(subject[:'long black'].sizes[1]).eql?(CoffeeVariant.new(size: :medium, price: 3.50))
+      expect(subject[:'long black'].sizes[0]).eql?(CoffeeApp::CoffeeVariant.new(size: :small, price: 3.25))
+      expect(subject[:'long black'].sizes[1]).eql?(CoffeeApp::CoffeeVariant.new(size: :medium, price: 3.50))
     end
   end
 end

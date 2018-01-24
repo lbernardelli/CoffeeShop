@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-RSpec.describe Coffee do
+RSpec.describe CoffeeApp::Coffee do
   describe 'initialize' do
     context 'initializing with name' do
-      subject { Coffee.new(name: 'coffee name') }
+      subject { CoffeeApp::Coffee.new(name: 'coffee name') }
 
       it 'Creates a coffee with name' do
         expect(subject.name).to eq 'coffee name'
@@ -15,7 +15,7 @@ RSpec.describe Coffee do
 
   describe 'add_size' do
     context 'Add a coffee size' do
-      subject { Coffee.new(name: 'coffee name').add_size(CoffeeVariant.new(size: :small, price: 1.00)) }
+      subject { CoffeeApp::Coffee.new(name: 'coffee name').add_size(CoffeeApp::CoffeeVariant.new(size: :small, price: 1.00)) }
 
       it 'has a size on it' do
         expect(subject.sizes).not_to be_empty
@@ -25,8 +25,8 @@ RSpec.describe Coffee do
 
   describe 'price?' do
     let(:coffee) do
-      coffee = Coffee.new(name: 'latte')
-      coffee.add_size(CoffeeVariant.new(size: :small, price: 1.00))
+      coffee = CoffeeApp::Coffee.new(name: 'latte')
+      coffee.add_size(CoffeeApp::CoffeeVariant.new(size: :small, price: 1.00))
     end
 
     context 'Get price from existing variant' do

@@ -2,9 +2,9 @@
 
 require 'spec_helper'
 
-RSpec.describe Order do
+RSpec.describe CoffeeApp::Order do
   describe 'Total' do
-    let(:order) { Order.new }
+    let(:order) { CoffeeApp::Order.new }
     context 'Empty order' do
       subject { order }
 
@@ -33,7 +33,7 @@ RSpec.describe Order do
     end
 
     def create_item_double(price)
-      object_double(OrderItem.new(product: nil, variant: nil), price?: price)
+      object_double(CoffeeApp::OrderItem.new(product: nil, variant: nil), price?: price)
     end
   end
 end
