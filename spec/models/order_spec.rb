@@ -9,7 +9,7 @@ RSpec.describe Order do
       subject { order }
 
       it 'Total is 0.00' do
-        expect(subject.total?).to be 0.00
+        expect(subject.total?).to eql BigDecimal.new('0.00')
       end
     end
 
@@ -19,7 +19,7 @@ RSpec.describe Order do
         order.add_item(create_item_double(1.00))
       end
 
-      it('has a total of 1.00') { expect(subject.total?).to be 1.00 }
+      it('has a total of 1.00') { expect(subject.total?).to eql BigDecimal.new('1.00') }
     end
 
     context 'Order has a bunch of items' do
@@ -29,7 +29,7 @@ RSpec.describe Order do
         order.add_item(create_item_double(1.75))
       end
 
-      it('has a total of 7.00') { expect(subject.total?).to be 7.25 }
+      it('has a total of 7.00') { expect(subject.total?).to eql BigDecimal.new('7.25') }
     end
 
     def create_item_double(price)
