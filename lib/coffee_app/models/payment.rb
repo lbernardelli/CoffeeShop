@@ -9,4 +9,3 @@ module CoffeeApp
     end
   end
 end
-

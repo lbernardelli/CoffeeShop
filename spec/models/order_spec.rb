@@ -15,7 +15,6 @@ RSpec.describe CoffeeApp::Order do
 
     context 'Order has 1 item' do
       subject do
-
         order.add_item(create_item_double(1.00))
       end
 

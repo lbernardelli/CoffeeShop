@@ -19,7 +19,7 @@ RSpec.describe CoffeeApp::CoffeeFactory do
       JSON
     end
 
-    it ('A list with one coffee') { expect(subject.size).to be 1 }
+    it('A list with one coffee') { expect(subject.size).to be 1 }
     it 'The built coffee' do
       expect(subject[:'short espresso'].name).to eq('short espresso')
       expect(subject[:'short espresso'].sizes.size).to be 1
