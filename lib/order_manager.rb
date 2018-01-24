@@ -17,10 +17,19 @@ class OrderManager
     self
   end
 
+  def credit_all(payments)
+    parsed_list(payments).each do |payment|
+      user_name = user_name(payment)
+      @users[user_name.to_sym] = find_user(user_name).pay(payment[:amount])
+    end
+
+    self
+  end
+
   private
 
-  def parsed_list(orders)
-    JsonParser.to_hash(orders)
+  def parsed_list(json)
+    JsonParser.to_hash(json)
   end
 
   def create_order(item)
@@ -32,10 +41,10 @@ class OrderManager
   end
 
   def find_user(user_name)
-    @users[:user] ? @users[:user_name] : User.new(name: user_name)
+    @users[user_name.to_sym] ? @users[user_name.to_sym] : User.new(name: user_name)
   end
 
-  def user_name(item)
-    item[:user]
+  def user_name(hash)
+    hash[:user]
   end
 end
