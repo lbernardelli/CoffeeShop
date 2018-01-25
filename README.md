@@ -1,3 +1,15 @@
+# Leonardo Bernardelli Code Task
+
+In this code task I tried to expose the most of object oriented programing it permitted me. I followed ruby style guide and all expectations I could get from information. I did not have the time I'd like to do it calmly.
+
+#### Considerations:
+
+- I assumed that when I pay more than I ordered I have a credit and this credit will be exposed as negative. This decision was made because the integration spec was defined to put on positive all value that user owes.
+- I did not use other gems because I wanted to show all my code here.
+- I decided to not use error handling and expect a Character as amount because I assumed that it's not a useful use case to show here (I'm not saying that error handle is not important, contrariwise).
+- I did not worry about performance here.
+- When I used rubocop to grant ruby code conventions I did not change all code existent here, I skipped rake class purposely. 
+
 # Envato Espresso
 
 Make sure you read **all** of this document carefully, and follow the guidelines
