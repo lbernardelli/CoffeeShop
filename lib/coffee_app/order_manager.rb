@@ -5,48 +5,23 @@ module CoffeeApp
     attr_reader :users
 
     def initialize(products)
-      @products = products
-      @users = {}
+      @user_repository = Repositories::UserRepository.new
+      @order_service = Services::OrderService.new(products, @user_repository)
+      @payment_service = Services::PaymentService.new(@user_repository)
     end
 
     def process_all(orders)
-      parsed_list(orders).each do |item|
-        user_name = user_name(item)
-        @users[user_name.to_sym] = find_user(user_name).add_order(create_order(item))
-      end
-
+      @order_service.process_orders(orders)
       self
     end
 
     def credit_all(payments)
-      parsed_list(payments).each do |payment|
-        user_name = user_name(payment)
-        @users[user_name.to_sym] = find_user(user_name).pay(payment[:amount])
-      end
-
+      @payment_service.process_payments(payments)
       self
     end
 
-    private
-
-    def parsed_list(json)
-      CoffeeApp::JsonParser.to_hash(json)
-    end
-
-    def create_order(item)
-      CoffeeApp::Order.new.add_item(create_item(item))
-    end
-
-    def create_item(item)
-      CoffeeApp::OrderItem.new(product: @products[item[:drink].to_sym], variant: item[:size].to_sym)
-    end
-
-    def find_user(user_name)
-      @users[user_name.to_sym] ? @users[user_name.to_sym] : CoffeeApp::User.new(name: user_name)
-    end
-
-    def user_name(hash)
-      hash[:user]
+    def users
+      @user_repository.all
     end
   end
 end
