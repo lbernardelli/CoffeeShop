@@ -5,8 +5,8 @@ require 'spec_helper'
 RSpec.describe CoffeeApp::User do
   let(:user) { CoffeeApp::User.new(name: 'Micheal') }
 
-  describe 'total_ordered?' do
-    subject { user.total_ordered? }
+  describe 'total_ordered' do
+    subject { user.total_ordered }
 
     context 'Empty order' do
       it('Total ordered is 0.00') { is_expected.to eql BigDecimal.new('0.00') }
@@ -29,8 +29,8 @@ RSpec.describe CoffeeApp::User do
     end
   end
 
-  describe 'total_payed?' do
-    subject { user.total_payed? }
+  describe 'total_paid' do
+    subject { user.total_paid }
 
     context 'No payments' do
       it('payed a total of 0.00') { is_expected.to eql BigDecimal.new('0.00') }
@@ -54,7 +54,7 @@ RSpec.describe CoffeeApp::User do
   end
 
   describe 'balance' do
-    subject { user.balance? }
+    subject { user.balance }
 
     context 'No orders nor payments' do
       it('has a balance of 0.00') { is_expected.to eql BigDecimal.new('0.00') }
@@ -84,6 +84,6 @@ RSpec.describe CoffeeApp::User do
   end
 
   def create_order_double(price)
-    object_double(CoffeeApp::Order.new, total?: price)
+    object_double(CoffeeApp::Order.new, total: price)
   end
 end

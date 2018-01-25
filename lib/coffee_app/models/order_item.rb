@@ -7,8 +7,8 @@ module CoffeeApp
       @variant = variant
     end
 
-    def price?
-      @product.price?(@variant)
+    def price
+      @product.price(@variant)
     end
   end
 end

@@ -13,8 +13,8 @@ module CoffeeApp
       self
     end
 
-    def total?
-      items.inject(BigDecimal('0.00')) { |sum, item| BigDecimal.new(sum.to_s) + BigDecimal.new(item.price?.to_s) }
+    def total
+      items.inject(BigDecimal('0.00')) { |sum, item| BigDecimal.new(sum.to_s) + BigDecimal.new(item.price.to_s) }
     end
   end
 end

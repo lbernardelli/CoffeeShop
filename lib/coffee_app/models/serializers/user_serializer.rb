@@ -5,9 +5,9 @@ module Serializers
     def serialize
       {
         user: @name,
-        order_total: total_ordered?.to_f,
-        payment_total: total_payed?.to_f,
-        balance: balance?.to_f
+        order_total: total_ordered.to_f,
+        payment_total: total_paid.to_f,
+        balance: balance.to_f
       }
     end
   end

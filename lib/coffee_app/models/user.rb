@@ -19,8 +19,8 @@ module CoffeeApp
       self
     end
 
-    def total_ordered?
-      @orders.inject(BigDecimal.new('0.00')) { |sum, order| BigDecimal.new(sum.to_s) + BigDecimal.new(order.total?.to_s) }
+    def total_ordered
+      @orders.inject(BigDecimal.new('0.00')) { |sum, order| BigDecimal.new(sum.to_s) + BigDecimal.new(order.total.to_s) }
     end
 
     def pay(amount)
@@ -28,12 +28,12 @@ module CoffeeApp
       self
     end
 
-    # Balance is calculated on what each user owe, so ordered - payed
-    def balance?
-      BigDecimal.new(total_ordered?.to_s) - BigDecimal.new(total_payed?.to_s)
+    # Balance is calculated on what each user owe, so ordered - paid
+    def balance
+      BigDecimal.new(total_ordered.to_s) - BigDecimal.new(total_paid.to_s)
     end
 
-    def total_payed?
+    def total_paid
       @payments.inject(BigDecimal.new('0.00')) { |sum, payment| BigDecimal.new(sum.to_s) + BigDecimal.new(payment.amount.to_s) }
     end
   end

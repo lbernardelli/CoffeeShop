@@ -23,20 +23,20 @@ RSpec.describe CoffeeApp::Coffee do
     end
   end
 
-  describe 'price?' do
+  describe 'price' do
     let(:coffee) do
       coffee = CoffeeApp::Coffee.new(name: 'latte')
       coffee.add_size(CoffeeApp::CoffeeVariant.new(size: :small, price: 1.00))
     end
 
     context 'Get price from existing variant' do
-      subject { coffee.price?(:small) }
+      subject { coffee.price(:small) }
 
       it('Has 1.00 price') { expect(subject).to eql BigDecimal.new('1.00') }
     end
 
     context 'Get price from a nonexistent variant' do
-      subject { coffee.price?(:large) }
+      subject { coffee.price(:large) }
 
       it('Has 0.00 price') { expect(subject).to eql BigDecimal.new('0.00') }
     end
