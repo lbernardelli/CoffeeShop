@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'bigdecimal'
+require 'coffee_app/value_objects/money'
 require 'coffee_app/factories/coffee_factory'
 require 'coffee_app/utils/json_parser'
 require 'coffee_app/errors/parse_error'
@@ -8,7 +10,6 @@ require 'coffee_app/services/order_service'
 require 'coffee_app/services/payment_service'
 require 'coffee_app/order_manager'
 require 'coffee_app/serializers/result_serializer'
-require 'bigdecimal'
 
 Dir[File.expand_path('../coffee_app/models/*.rb', __FILE__)].map do |path|
   require path

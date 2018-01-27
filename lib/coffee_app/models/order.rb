@@ -14,7 +14,7 @@ module CoffeeApp
     end
 
     def total
-      items.inject(BigDecimal.new('0.00')) { |sum, item| BigDecimal.new(sum.to_s) + BigDecimal.new(item.price.to_s) }
+      items.inject(ValueObjects::Money.zero) { |sum, item| sum + item.price }
     end
   end
 end

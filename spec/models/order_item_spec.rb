@@ -12,7 +12,7 @@ RSpec.describe CoffeeApp::OrderItem do
         CoffeeApp::OrderItem.new(variant: :small, product: coffee).price
       end
 
-      it('Has the variant price') { expect(subject).to eql BigDecimal.new('1.00') }
+      it('Has the variant price') { expect(subject.to_f).to eq('1.00') }
     end
 
     context 'Find a product price from inconsistent order item' do
@@ -23,7 +23,7 @@ RSpec.describe CoffeeApp::OrderItem do
         CoffeeApp::OrderItem.new(variant: :large, product: coffee).price
       end
 
-      it('The price is 0.00') { expect(subject).to eql BigDecimal.new('0.00') }
+      it('The price is 0.00') { expect(subject.to_f).to eq('0.00') }
     end
   end
 end

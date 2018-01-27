@@ -6,7 +6,7 @@ module CoffeeApp
 
     def initialize(attr)
       @size = attr[:size]
-      @price = BigDecimal.new(attr[:price].to_s)
+      @price = ValueObjects::Money.new(attr[:price])
     end
   end
 end

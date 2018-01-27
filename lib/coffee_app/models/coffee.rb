@@ -15,9 +15,9 @@ module CoffeeApp
     end
 
     def price(variant)
-      price = @sizes.select { |size_variant| size_variant.size.eql?(variant.to_sym) }[0]&.price
+      size_variant = @sizes.find { |size_variant| size_variant.size.eql?(variant.to_sym) }
 
-      price ? BigDecimal.new(price.to_s) : BigDecimal.new('0.00')
+      size_variant ? size_variant.price : ValueObjects::Money.zero
     end
   end
 end

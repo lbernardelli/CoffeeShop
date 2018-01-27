@@ -5,7 +5,7 @@ module CoffeeApp
     attr_reader :amount
 
     def initialize(amount:)
-      @amount = BigDecimal.new(amount.to_s)
+      @amount = ValueObjects::Money.new(amount)
     end
   end
 end

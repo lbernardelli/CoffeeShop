@@ -20,7 +20,7 @@ module CoffeeApp
     end
 
     def total_ordered
-      @orders.inject(BigDecimal.new('0.00')) { |sum, order| BigDecimal.new(sum.to_s) + BigDecimal.new(order.total.to_s) }
+      @orders.inject(ValueObjects::Money.zero) { |sum, order| sum + order.total }
     end
 
     def pay(amount)
@@ -30,11 +30,11 @@ module CoffeeApp
 
     # Balance is calculated on what each user owe, so ordered - paid
     def balance
-      BigDecimal.new(total_ordered.to_s) - BigDecimal.new(total_paid.to_s)
+      total_ordered - total_paid
     end
 
     def total_paid
-      @payments.inject(BigDecimal.new('0.00')) { |sum, payment| BigDecimal.new(sum.to_s) + BigDecimal.new(payment.amount.to_s) }
+      @payments.inject(ValueObjects::Money.zero) { |sum, payment| sum + payment.amount }
     end
   end
 end

@@ -31,8 +31,8 @@ RSpec.describe CoffeeApp::Services::OrderService do
 
         expect(alice.orders.size).to eq(1)
         expect(bob.orders.size).to eq(1)
-        expect(alice.total_ordered).to eq(BigDecimal.new('3.50'))
-        expect(bob.total_ordered).to eq(BigDecimal.new('4.00'))
+        expect(alice.total_ordered.to_f).to eq('3.50'))
+        expect(bob.total_ordered.to_f).to eq('4.00'))
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe CoffeeApp::Services::OrderService do
 
         charlie = user_repository.all[:charlie]
         expect(charlie.orders.size).to eq(2)
-        expect(charlie.total_ordered).to eq(BigDecimal.new('7.50'))
+        expect(charlie.total_ordered.to_f).to eq('7.50'))
       end
     end
 
