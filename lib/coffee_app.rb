@@ -8,6 +8,7 @@ require 'coffee_app/errors/parse_error'
 require 'coffee_app/repositories/user_repository'
 require 'coffee_app/services/order_service'
 require 'coffee_app/services/payment_service'
+require 'coffee_app/presenters/user_presenter'
 require 'coffee_app/order_manager'
 require 'coffee_app/serializers/result_serializer'
 
