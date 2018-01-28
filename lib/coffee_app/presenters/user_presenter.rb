@@ -10,9 +10,9 @@ module CoffeeApp
       def to_hash
         {
           user: @user.name,
-          order_total: @user.total_ordered.to_f,
-          payment_total: @user.total_paid.to_f,
-          balance: @user.balance.to_f
+          order_total: @user.formatted_total_ordered,
+          payment_total: @user.formatted_total_paid,
+          balance: @user.formatted_balance
         }
       end
 

@@ -116,4 +116,72 @@ RSpec.describe CoffeeApp::User do
       end
     end
   end
+
+  describe 'formatted values for presentation' do
+    let(:user) { CoffeeApp::User.new(name: 'TestUser') }
+
+    describe '#formatted_total_ordered' do
+      context 'with no orders' do
+        it 'returns 0.0' do
+          expect(user.formatted_total_ordered).to eq(0.0)
+        end
+      end
+
+      context 'with orders' do
+        it 'returns total ordered as float' do
+          user.add_order(create_order_double(10.50))
+          user.add_order(create_order_double(5.25))
+          expect(user.formatted_total_ordered).to eq(15.75)
+        end
+      end
+    end
+
+    describe '#formatted_total_paid' do
+      context 'with no payments' do
+        it 'returns 0.0' do
+          expect(user.formatted_total_paid).to eq(0.0)
+        end
+      end
+
+      context 'with payments' do
+        it 'returns total paid as float' do
+          user.pay(20.00)
+          user.pay(5.50)
+          expect(user.formatted_total_paid).to eq(25.50)
+        end
+      end
+    end
+
+    describe '#formatted_balance' do
+      context 'with no orders or payments' do
+        it 'returns 0.0' do
+          expect(user.formatted_balance).to eq(0.0)
+        end
+      end
+
+      context 'with positive balance (owes money)' do
+        it 'returns positive balance as float' do
+          user.add_order(create_order_double(15.00))
+          user.pay(5.00)
+          expect(user.formatted_balance).to eq(10.00)
+        end
+      end
+
+      context 'with negative balance (has credit)' do
+        it 'returns negative balance as float' do
+          user.add_order(create_order_double(10.00))
+          user.pay(15.00)
+          expect(user.formatted_balance).to eq(-5.00)
+        end
+      end
+
+      context 'with zero balance' do
+        it 'returns 0.0' do
+          user.add_order(create_order_double(10.00))
+          user.pay(10.00)
+          expect(user.formatted_balance).to eq(0.0)
+        end
+      end
+    end
+  end
 end

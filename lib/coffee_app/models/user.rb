@@ -34,6 +34,18 @@ module CoffeeApp
       @payments.inject(ValueObjects::Money.zero) { |sum, payment| sum + payment.amount }
     end
 
+    def formatted_total_ordered
+      total_ordered.to_f
+    end
+
+    def formatted_total_paid
+      total_paid.to_f
+    end
+
+    def formatted_balance
+      balance.to_f
+    end
+
     private
 
     def validate_name(name)
