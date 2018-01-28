@@ -23,8 +23,8 @@ RSpec.describe CoffeeApp::Services::PaymentService do
         alice = user_repository.all[:alice]
         bob = user_repository.all[:bob]
 
-        expect(alice.total_paid.to_f).to eq('10.00'))
-        expect(bob.total_paid.to_f).to eq('5.50'))
+        expect(alice.total_paid.to_f).to eq(10.00)
+        expect(bob.total_paid.to_f).to eq(5.50)
       end
     end
 
@@ -42,7 +42,7 @@ RSpec.describe CoffeeApp::Services::PaymentService do
         service.process_payments(payments_json)
 
         charlie = user_repository.all[:charlie]
-        expect(charlie.total_paid.to_f).to eq('25.00'))
+        expect(charlie.total_paid.to_f).to eq(25.00)
       end
     end
 
@@ -66,7 +66,7 @@ RSpec.describe CoffeeApp::Services::PaymentService do
         service.process_payments(payments_json)
 
         dave = user_repository.all[:dave]
-        expect(dave.total_paid.to_f).to eq('0.00'))
+        expect(dave.total_paid.to_f).to eq(0.00)
       end
     end
   end

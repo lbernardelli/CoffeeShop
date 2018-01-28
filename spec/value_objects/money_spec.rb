@@ -143,4 +143,43 @@ RSpec.describe CoffeeApp::ValueObjects::Money do
       expect(money.to_s).to match(/10\.5/)
     end
   end
+
+  describe 'validations' do
+    context 'when amount is nil' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::ValueObjects::Money.new(nil) }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'Amount cannot be nil')
+      end
+    end
+
+    context 'when amount is invalid' do
+      it 'raises ValidationError for invalid string' do
+        expect { CoffeeApp::ValueObjects::Money.new('invalid') }
+          .to raise_error(CoffeeApp::Errors::ValidationError, /Invalid amount/)
+      end
+
+      it 'raises ValidationError for invalid object' do
+        expect { CoffeeApp::ValueObjects::Money.new(Object.new) }
+          .to raise_error(CoffeeApp::Errors::ValidationError, /Invalid amount/)
+      end
+    end
+
+    context 'when amount is valid' do
+      it 'accepts integers' do
+        expect { CoffeeApp::ValueObjects::Money.new(10) }.not_to raise_error
+      end
+
+      it 'accepts floats' do
+        expect { CoffeeApp::ValueObjects::Money.new(10.50) }.not_to raise_error
+      end
+
+      it 'accepts strings' do
+        expect { CoffeeApp::ValueObjects::Money.new('10.50') }.not_to raise_error
+      end
+
+      it 'accepts negative values' do
+        expect { CoffeeApp::ValueObjects::Money.new(-10.50) }.not_to raise_error
+      end
+    end
+  end
 end

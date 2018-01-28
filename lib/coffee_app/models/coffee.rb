@@ -5,6 +5,7 @@ module CoffeeApp
     attr_reader :name, :sizes
 
     def initialize(name:)
+      validate_name(name)
       @name = name
       @sizes = []
     end
@@ -18,6 +19,18 @@ module CoffeeApp
       size_variant = @sizes.find { |size_variant| size_variant.size.eql?(variant.to_sym) }
 
       size_variant ? size_variant.price : ValueObjects::Money.zero
+    end
+
+    private
+
+    def validate_name(name)
+      if name.nil? || name.to_s.strip.empty?
+        raise Errors::ValidationError.new(
+          'Coffee name cannot be empty',
+          field: :name,
+          value: name
+        )
+      end
     end
   end
 end

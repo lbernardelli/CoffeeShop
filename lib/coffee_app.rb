@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'bigdecimal'
+require 'coffee_app/errors/parse_error'
+require 'coffee_app/errors/validation_error'
 require 'coffee_app/value_objects/money'
 require 'coffee_app/factories/coffee_factory'
 require 'coffee_app/utils/json_parser'
-require 'coffee_app/errors/parse_error'
 require 'coffee_app/repositories/user_repository'
 require 'coffee_app/services/order_service'
 require 'coffee_app/services/payment_service'

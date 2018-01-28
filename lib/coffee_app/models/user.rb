@@ -5,6 +5,7 @@ module CoffeeApp
     attr_reader :name, :orders
 
     def initialize(name:)
+      validate_name(name)
       @name = name
       @orders = []
       @payments = []
@@ -31,6 +32,18 @@ module CoffeeApp
 
     def total_paid
       @payments.inject(ValueObjects::Money.zero) { |sum, payment| sum + payment.amount }
+    end
+
+    private
+
+    def validate_name(name)
+      if name.nil? || name.to_s.strip.empty?
+        raise Errors::ValidationError.new(
+          'User name cannot be empty',
+          field: :name,
+          value: name
+        )
+      end
     end
   end
 end

@@ -8,6 +8,7 @@ module CoffeeApp
       attr_reader :amount
 
       def initialize(amount)
+        validate_amount(amount)
         @amount = BigDecimal.new(amount.to_s)
       end
 
@@ -69,6 +70,29 @@ module CoffeeApp
 
       def negative?
         @amount < 0
+      end
+
+      private
+
+      def validate_amount(amount)
+        if amount.nil?
+          raise CoffeeApp::Errors::ValidationError.new(
+            'Amount cannot be nil',
+            field: :amount,
+            value: amount
+          )
+        end
+
+        # Check if the value can be converted to a valid number
+        begin
+          numeric_value = BigDecimal.new(amount.to_s)
+        rescue ArgumentError, TypeError => e
+          raise CoffeeApp::Errors::ValidationError.new(
+            "Invalid amount: #{amount.inspect}",
+            field: :amount,
+            value: amount
+          )
+        end
       end
     end
   end

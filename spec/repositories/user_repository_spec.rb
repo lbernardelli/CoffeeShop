@@ -39,7 +39,7 @@ RSpec.describe CoffeeApp::Repositories::UserRepository do
       user = repository.find_or_create('Dave')
       user.pay(10.00)
       repository.save(user)
-      expect(repository.all[:Dave].total_paid.to_f).to eq('10.00'))
+      expect(repository.all[:Dave].total_paid.to_f).to eq(10.00)
     end
   end
 
