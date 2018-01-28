@@ -61,6 +61,30 @@ RSpec.describe CoffeeApp::Services::OrderService do
         expect(user_repository.all).to be_empty
       end
     end
+
+    context 'with invalid drink name' do
+      let(:invalid_orders_json) do
+        <<-JSON
+        [
+          {"user":"dave","drink":"espresso","size":"small"}
+        ]
+        JSON
+      end
+
+      it 'raises ValidationError with descriptive message' do
+        expect { service.process_orders(invalid_orders_json) }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'Unknown drink: espresso')
+      end
+
+      it 'includes field and value in error' do
+        begin
+          service.process_orders(invalid_orders_json)
+        rescue CoffeeApp::Errors::ValidationError => e
+          expect(e.field).to eq(:drink)
+          expect(e.value).to eq('espresso')
+        end
+      end
+    end
   end
 
   def stub_coffee_price(coffee, size, price)

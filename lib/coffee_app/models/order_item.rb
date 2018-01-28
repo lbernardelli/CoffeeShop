@@ -2,6 +2,8 @@
 
 module CoffeeApp
   class OrderItem
+    attr_reader :product, :variant
+
     def initialize(product:, variant:)
       validate_product(product)
       validate_variant(variant)

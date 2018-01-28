@@ -3,6 +3,8 @@
 module CoffeeApp
   module Services
     class PaymentService
+      include Concerns::JsonParseable
+
       def initialize(user_repository)
         @user_repository = user_repository
       end
@@ -21,14 +23,6 @@ module CoffeeApp
       end
 
       private
-
-      def parse_json(json)
-        CoffeeApp::JsonParser.to_hash(json)
-      end
-
-      def extract_user_name(data)
-        data[:user]
-      end
     end
   end
 end

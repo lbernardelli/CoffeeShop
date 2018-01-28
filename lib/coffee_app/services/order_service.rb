@@ -3,6 +3,8 @@
 module CoffeeApp
   module Services
     class OrderService
+      include Concerns::JsonParseable
+
       def initialize(products, user_repository)
         @products = products
         @user_repository = user_repository
@@ -23,14 +25,6 @@ module CoffeeApp
 
       private
 
-      def parse_json(json)
-        CoffeeApp::JsonParser.to_hash(json)
-      end
-
-      def extract_user_name(data)
-        data[:user]
-      end
-
       def build_order(order_data)
         order = CoffeeApp::Order.new
         item = build_order_item(order_data)
@@ -38,9 +32,24 @@ module CoffeeApp
       end
 
       def build_order_item(order_data)
-        product = @products[order_data[:drink].to_sym]
+        drink_name = order_data[:drink]
+        product = find_product(drink_name)
         variant = order_data[:size].to_sym
         CoffeeApp::OrderItem.new(product: product, variant: variant)
+      end
+
+      def find_product(drink_name)
+        product = @products[drink_name.to_sym]
+
+        unless product
+          raise Errors::ValidationError.new(
+            "Unknown drink: #{drink_name}",
+            field: :drink,
+            value: drink_name
+          )
+        end
+
+        product
       end
     end
   end
