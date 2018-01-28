@@ -41,4 +41,34 @@ RSpec.describe CoffeeApp::Coffee do
       it('Has 0.00 price') { expect(subject.to_f).to eq('0.00') }
     end
   end
+
+  describe '#initialize validations' do
+    context 'with valid name' do
+      it 'creates coffee successfully' do
+        coffee = CoffeeApp::Coffee.new(name: 'Espresso')
+        expect(coffee.name).to eq('Espresso')
+      end
+    end
+
+    context 'with nil name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::Coffee.new(name: nil) }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'Coffee name cannot be empty')
+      end
+    end
+
+    context 'with empty name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::Coffee.new(name: '') }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'Coffee name cannot be empty')
+      end
+    end
+
+    context 'with whitespace name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::Coffee.new(name: '  ') }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'Coffee name cannot be empty')
+      end
+    end
+  end
 end

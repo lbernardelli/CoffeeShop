@@ -86,4 +86,34 @@ RSpec.describe CoffeeApp::User do
   def create_order_double(price)
     object_double(CoffeeApp::Order.new, total: CoffeeApp::ValueObjects::Money.new(price))
   end
+
+  describe '#initialize' do
+    context 'with valid name' do
+      it 'creates user successfully' do
+        user = CoffeeApp::User.new(name: 'Alice')
+        expect(user.name).to eq('Alice')
+      end
+    end
+
+    context 'with nil name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::User.new(name: nil) }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'User name cannot be empty')
+      end
+    end
+
+    context 'with empty name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::User.new(name: '') }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'User name cannot be empty')
+      end
+    end
+
+    context 'with whitespace name' do
+      it 'raises ValidationError' do
+        expect { CoffeeApp::User.new(name: '   ') }
+          .to raise_error(CoffeeApp::Errors::ValidationError, 'User name cannot be empty')
+      end
+    end
+  end
 end
