@@ -34,12 +34,13 @@ module CoffeeApp
       def build_order_item(order_data)
         drink_name = order_data[:drink]
         product = find_product(drink_name)
-        variant = order_data[:size].to_sym
+        variant = Support::SymbolKey.normalize(order_data[:size])
         CoffeeApp::OrderItem.new(product: product, variant: variant)
       end
 
       def find_product(drink_name)
-        product = @products[drink_name.to_sym]
+        key = Support::SymbolKey.normalize(drink_name)
+        product = @products[key]
 
         unless product
           raise Errors::ValidationError.new(

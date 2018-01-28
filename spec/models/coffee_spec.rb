@@ -71,4 +71,11 @@ RSpec.describe CoffeeApp::Coffee do
       end
     end
   end
+
+  describe '#null_object?' do
+    it 'returns false for real coffee' do
+      coffee = CoffeeApp::Coffee.new(name: 'latte')
+      expect(coffee.null_object?).to be false
+    end
+  end
 end

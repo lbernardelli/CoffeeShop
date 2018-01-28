@@ -8,11 +8,13 @@ module CoffeeApp
       end
 
       def find_or_create(user_name)
-        @users[user_name.to_sym] ||= CoffeeApp::User.new(name: user_name)
+        key = Support::SymbolKey.normalize(user_name)
+        @users[key] ||= CoffeeApp::User.new(name: user_name)
       end
 
       def save(user)
-        @users[user.name.to_sym] = user
+        key = Support::SymbolKey.normalize(user.name)
+        @users[key] = user
       end
 
       def all

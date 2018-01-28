@@ -16,9 +16,14 @@ module CoffeeApp
     end
 
     def price(variant)
-      size_variant = @sizes.find { |size_variant| size_variant.size.eql?(variant.to_sym) }
+      normalized_variant = Support::SymbolKey.normalize(variant)
+      size_variant = @sizes.find { |size_variant| size_variant.size.eql?(normalized_variant) }
 
       size_variant ? size_variant.price : ValueObjects::Money.zero
+    end
+
+    def null_object?
+      false
     end
 
     private

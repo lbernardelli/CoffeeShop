@@ -9,7 +9,8 @@ module CoffeeApp
 
       def initialize(amount)
         validate_amount(amount)
-        @amount = BigDecimal.new(amount.to_s)
+        @amount = BigDecimal.new(amount.to_s).freeze
+        freeze
       end
 
       def self.zero

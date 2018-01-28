@@ -15,7 +15,8 @@ module CoffeeApp
           coffee.add_size(CoffeeVariant.new(size: price[0], price: price[1]))
         end
 
-        @coffees[coffee.name.to_sym] = coffee
+        key = Support::SymbolKey.normalize(coffee.name)
+        @coffees[key] = coffee
       end
 
       @coffees

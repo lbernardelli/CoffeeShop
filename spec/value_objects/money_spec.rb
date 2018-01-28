@@ -144,6 +144,23 @@ RSpec.describe CoffeeApp::ValueObjects::Money do
     end
   end
 
+  describe 'immutability' do
+    it 'freezes the Money instance' do
+      money = CoffeeApp::ValueObjects::Money.new(10.50)
+      expect(money).to be_frozen
+    end
+
+    it 'freezes the internal amount' do
+      money = CoffeeApp::ValueObjects::Money.new(10.50)
+      expect(money.amount).to be_frozen
+    end
+
+    it 'cannot be modified after creation' do
+      money = CoffeeApp::ValueObjects::Money.new(10.50)
+      expect { money.instance_variable_set(:@amount, 20) }.to raise_error(FrozenError)
+    end
+  end
+
   describe 'validations' do
     context 'when amount is nil' do
       it 'raises ValidationError' do
