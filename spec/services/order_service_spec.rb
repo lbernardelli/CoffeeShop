@@ -88,7 +88,7 @@ RSpec.describe CoffeeApp::Services::OrderService do
   end
 
   def stub_coffee_price(coffee, size, price)
-    allow(coffee).to receive(:price).with(size).and_return(price)
+    allow(coffee).to receive(:price).with(size).and_return(CoffeeApp::ValueObjects::Money.new(price))
     coffee
   end
 end

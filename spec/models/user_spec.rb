@@ -33,13 +33,13 @@ RSpec.describe CoffeeApp::User do
     subject { user.total_paid }
 
     context 'No payments' do
-      it('payed a total of 0.00') { expect(subject.to_f).to eq('0.00') }
+      it('payed a total of 0.00') { expect(subject.to_f).to eq(0.0) }
     end
 
     context 'User payed 1.00' do
       before { user.pay(1.00) }
 
-      it('payed a total of 1.00') { expect(subject.to_f).to eq('1.00') }
+      it('payed a total of 1.00') { expect(subject.to_f).to eq(1.00) }
     end
 
     context 'User had ordered a bunch of products' do
@@ -49,7 +49,7 @@ RSpec.describe CoffeeApp::User do
         user.pay(3.53)
       end
 
-      it('has a total of 7.03') { expect(subject.to_f).to eq('7.03') }
+      it('has a total of 7.03') { expect(subject.to_f).to eq(7.03) }
     end
   end
 
@@ -57,20 +57,20 @@ RSpec.describe CoffeeApp::User do
     subject { user.balance }
 
     context 'No orders nor payments' do
-      it('has a balance of 0.00') { expect(subject.to_f).to eq('0.00') }
+      it('has a balance of 0.00') { expect(subject.to_f).to eq(0.0) }
     end
 
     context 'User had ordered 1 product' do
       before { user.add_order(create_order_double(1.00)) }
 
-      it('has a balance of 1.00') { expect(subject.to_f).to eq('1.00') }
+      it('has a balance of 1.00') { expect(subject.to_f).to eq(1.00) }
     end
 
     context 'User payed 1.00' do
       before { user.pay(1.00) }
 
       # User has a 1.00 credit
-      it('has a balance of -1.00') { expect(subject.to_f).to eq('-1.00') }
+      it('has a balance of -1.00') { expect(subject.to_f).to eq(-1.00) }
     end
 
     context 'User ordered 1.00 and payed 1.00' do
@@ -79,7 +79,7 @@ RSpec.describe CoffeeApp::User do
         user.pay(1.00)
       end
 
-      it('has a balance of 0.00') { expect(subject.to_f).to eq('0.00') }
+      it('has a balance of 0.00') { expect(subject.to_f).to eq(0.0) }
     end
   end
 

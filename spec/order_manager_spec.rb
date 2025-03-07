@@ -32,13 +32,13 @@ RSpec.describe CoffeeApp::OrderManager do
       end
 
       it('3 users orders processed') { expect(subject.users.size).to be 3 }
-      it('Coach ordered 2.25') { expect(subject.users[:coach].total_ordered.to_f).to eq('2.25') }
-      it('ellis ordered 1.50') { expect(subject.users[:ellis].total_ordered.to_f).to eq('1.50') }
-      it('rochelle ordered 3.50') { expect(subject.users[:rochelle].total_ordered.to_f).to eq('3.50') }
+      it('Coach ordered 2.25') { expect(subject.users[:coach].total_ordered.to_f).to eq(2.25) }
+      it('ellis ordered 1.50') { expect(subject.users[:ellis].total_ordered.to_f).to eq(1.50) }
+      it('rochelle ordered 3.50') { expect(subject.users[:rochelle].total_ordered.to_f).to eq(3.50) }
     end
 
     def stub_coffee_price(coffee, size, price)
-      allow(coffee).to receive(:price).with(size).and_return(price)
+      allow(coffee).to receive(:price).with(size).and_return(CoffeeApp::ValueObjects::Money.new(price))
       coffee
     end
   end
@@ -65,9 +65,9 @@ RSpec.describe CoffeeApp::OrderManager do
       end
 
       it('3 users payments processed') { expect(subject.users.size).to be 3 }
-      it('Coach payed 25.49') { expect(subject.users[:coach].total_paid.to_f).to eq('25.49') }
-      it('rochelle payed 7.75') { expect(subject.users[:rochelle].total_paid.to_f).to eq('7.75') }
-      it('ellis payed 0.00') { expect(subject.users[:ellis].total_paid.to_f).to eq('0.00') }
+      it('Coach payed 25.49') { expect(subject.users[:coach].total_paid.to_f).to eq(25.49) }
+      it('rochelle payed 7.75') { expect(subject.users[:rochelle].total_paid.to_f).to eq(7.75) }
+      it('ellis payed 0.00') { expect(subject.users[:ellis].total_paid.to_f).to eq(0.0) }
     end
   end
 

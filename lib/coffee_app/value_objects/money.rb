@@ -9,7 +9,7 @@ module CoffeeApp
 
       def initialize(amount)
         validate_amount(amount)
-        @amount = BigDecimal.new(amount.to_s).freeze
+        @amount = BigDecimal(amount.to_s).freeze
         freeze
       end
 
@@ -74,7 +74,7 @@ module CoffeeApp
 
         # Check if the value can be converted to a valid number
         begin
-          numeric_value = BigDecimal.new(amount.to_s)
+          numeric_value = BigDecimal(amount.to_s)
         rescue ArgumentError, TypeError => e
           raise CoffeeApp::Errors::ValidationError.new(
             "Invalid amount: #{amount.inspect}",
