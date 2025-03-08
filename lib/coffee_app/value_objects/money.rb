@@ -49,29 +49,17 @@ module CoffeeApp
         @amount.hash
       end
 
-      def to_f
-        @amount.to_f
-      end
+      def to_f = @amount.to_f
 
-      def to_s
-        @amount.to_s('F')
-      end
+      def to_s = @amount.to_s('F')
 
-      def inspect
-        "#<Money #{to_s}>"
-      end
+      def inspect = "#<Money #{to_s}>"
 
-      def zero?
-        @amount.zero?
-      end
+      def zero? = @amount.zero?
 
-      def positive?
-        @amount > 0
-      end
+      def positive? = @amount > 0
 
-      def negative?
-        @amount < 0
-      end
+      def negative? = @amount < 0
 
       private
 

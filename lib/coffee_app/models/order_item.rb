@@ -11,9 +11,7 @@ module CoffeeApp
       @variant = variant
     end
 
-    def price
-      @product.price(@variant)
-    end
+    def price = @product.price(@variant)
 
     private
 

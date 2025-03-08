@@ -8,20 +8,12 @@ module CoffeeApp
       @name = name
     end
 
-    def price(_variant)
-      ValueObjects::Money.zero
-    end
+    def price(_variant) = ValueObjects::Money.zero
 
-    def add_size(_coffee_variant)
-      self
-    end
+    def add_size(_coffee_variant) = self
 
-    def sizes
-      []
-    end
+    def sizes = []
 
-    def null_object?
-      true
-    end
+    def null_object? = true
   end
 end

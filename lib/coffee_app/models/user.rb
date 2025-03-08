@@ -17,7 +17,7 @@ module CoffeeApp
     end
 
     def total_ordered
-      @orders.inject(ValueObjects::Money.zero) { |sum, order| sum + order.total }
+      @orders.inject(ValueObjects::Money.zero) { _1 + _2.total }
     end
 
     def pay(amount)
@@ -31,20 +31,14 @@ module CoffeeApp
     end
 
     def total_paid
-      @payments.inject(ValueObjects::Money.zero) { |sum, payment| sum + payment.amount }
+      @payments.inject(ValueObjects::Money.zero) { _1 + _2.amount }
     end
 
-    def formatted_total_ordered
-      total_ordered.to_f
-    end
+    def formatted_total_ordered = total_ordered.to_f
 
-    def formatted_total_paid
-      total_paid.to_f
-    end
+    def formatted_total_paid = total_paid.to_f
 
-    def formatted_balance
-      balance.to_f
-    end
+    def formatted_balance = balance.to_f
 
     private
 

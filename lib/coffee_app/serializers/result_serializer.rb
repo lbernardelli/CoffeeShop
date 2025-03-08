@@ -3,9 +3,7 @@
 module CoffeeApp
   class ResultSerializer
     def self.serialize(users)
-      users.each_value.map do |user|
-        Presenters::UserPresenter.new(user).to_hash
-      end
+      users.each_value.map { Presenters::UserPresenter.new(_1).to_hash }
     end
   end
 end

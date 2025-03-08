@@ -14,7 +14,7 @@ module CoffeeApp
     end
 
     def total
-      items.inject(ValueObjects::Money.zero) { |sum, item| sum + item.price }
+      items.inject(ValueObjects::Money.zero) { _1 + _2.price }
     end
   end
 end

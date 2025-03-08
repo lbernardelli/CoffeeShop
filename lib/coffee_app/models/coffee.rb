@@ -22,9 +22,7 @@ module CoffeeApp
       size_variant ? size_variant.price : ValueObjects::Money.zero
     end
 
-    def null_object?
-      false
-    end
+    def null_object? = false
 
     private
 
